@@ -32,7 +32,8 @@ myForm.addEventListener("submit", function (e) {
     for (let index = 0; index < data.length; index++) {
       if (updatedData != undefined) {
         if (data[index].region == data[index - 1].region) {
-          updatedData = updatedData + `   ${prefix}("${data[index].branch}");\n`;
+          updatedData =
+            updatedData + `   ${prefix}.addItem("${data[index].branch}");\n`;
           if (index + 1 == data.length) {
             updatedData = updatedData + "break;\n";
           }
@@ -40,7 +41,10 @@ myForm.addEventListener("submit", function (e) {
           updatedData = updatedData + "break;\n";
           updatedData =
             updatedData + `case "${count}": //${data[index].region}\n`;
-          updatedData = updatedData + `   ${prefix}("${data[index].branch}");\n`;
+          updatedData = updatedData + `   ${prefix}.rawValue = "";\n`;
+          updatedData = updatedData + `   ${prefix}.clearItems();\n`;
+          updatedData =
+            updatedData + `   ${prefix}.addItem("${data[index].branch}");\n`;
           if (index + 1 == data.length) {
             updatedData = updatedData + "break;\n";
           }
@@ -48,7 +52,10 @@ myForm.addEventListener("submit", function (e) {
         }
       } else {
         updatedData = `case "${count}": //${data[index].region}\n`;
-        updatedData = updatedData + `   ${prefix}("${data[index].branch}");\n`;
+        updatedData = updatedData + `   ${prefix}.rawValue = "";\n`;
+        updatedData = updatedData + `   ${prefix}.clearItems();\n`;
+        updatedData =
+          updatedData + `   ${prefix}.addItem("${data[index].branch}");\n`;
         count++;
       }
     }
