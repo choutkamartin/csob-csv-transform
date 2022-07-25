@@ -1,7 +1,8 @@
-const myForm = document.getElementById("myForm");
+const form = document.getElementById("form");
 const csvFile = document.getElementById("csvFile");
 const prefixInput = document.getElementById("prefix");
 const result = document.getElementById("result");
+const encoding = document.getElementById("encoding");
 
 function csvToArray(str, delimiter = ";") {
   const headers = str.slice(0, str.indexOf("\r\n")).split(delimiter);
@@ -20,7 +21,7 @@ function csvToArray(str, delimiter = ";") {
   return arr;
 }
 
-myForm.addEventListener("submit", function (e) {
+form.addEventListener("submit", function (e) {
   e.preventDefault();
   const prefix = prefixInput.value;
   const input = csvFile.files[0];
@@ -62,5 +63,5 @@ myForm.addEventListener("submit", function (e) {
     result.innerHTML = updatedData;
     hljs.highlightAll();
   };
-  reader.readAsText(input, "windows-1250");
+  reader.readAsText(input, encoding);
 });

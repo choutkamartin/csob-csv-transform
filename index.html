@@ -1,28 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skript pro úpravu CSV souboru pro ČSOB</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon-16x16.png"
+    />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-    <title>Script</title>
   </head>
   <body>
-    <form id="myForm">
-      <label for="prefix">Prefix</label>
-      <input type="text" id="prefix" />
-      <label for="csvFile">CSV soubor</label>
-      <input type="file" id="csvFile" accept=".csv" />
-      <br />
-      <button type="submit">Odeslat</button>
-    </form>
-    <pre>
+    <div class="container my-5">
+      <h2>Skript pro úpravu CSV souboru poboček do Adobe LiveCycle pro ČSOB</h2>
+      <hr />
+      <p>
+        Tento skript slouží k převedení CSV souboru poboček do struktury, resp.
+        kódu, který lze rovnou vkládat do Adobe LiveCycle. Není nutné proto
+        přepisovat jednotlivé upravené pobočky zvlášť. Ušetří to nějaký ten čas.
+        Stačí akorát nahrát CSV soubor, který chceme převést. Stránka nám potom
+        vrátí samotný kód. Do pole "Prefix" je potřeba vložit cestu k objektu v
+        Adobe LiveCycle, kde jsou pobočky vypsány. V poli "Kódování" je nutné
+        zvolit, v jakém formátu je CSV kódováno. Běžně UTF-8, nebo Windows 1250.
+      </p>
+      <form id="form">
+        <div class="mb-3">
+          <label for="prefix">Prefix</label>
+          <input class="form-control" type="text" id="prefix" />
+        </div>
+        <div class="mb-3">
+          <label for="csvFile">CSV soubor</label>
+          <input class="form-control" type="file" id="csvFile" accept=".csv" />
+        </div>
+        <div class="mb-3">
+          <label for="csvFile">Kódování</label>
+          <select class="form-select" id="encoding">
+            <option selected>Zvol jedno z kódování</option>
+            <option value="utf-8">UTF-8</option>
+            <option value="windows-1250" selected>Windows 1250</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Odeslat</button>
+      </form>
+      <pre>
       <code id="result" class="language-js"></code>
-    </pre>
+      </pre>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
